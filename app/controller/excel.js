@@ -11,6 +11,7 @@ class HomeController extends Controller {
 
     const excelConfigs = [{
       sheet: 'sheet1',
+      dataFormat: true,
       columns: [
         {
           header: 'Id',
@@ -46,7 +47,7 @@ class HomeController extends Controller {
           width: 10,
           outlineLevel: 1
         }, {
-          header: 'price',
+          header: 'price2',
           key: 'price',
           width: 30,
           dataFormat: function(cell, row) {
@@ -56,7 +57,7 @@ class HomeController extends Controller {
             numFmt: '0.00'
           }
         }],
-      data: [{ id: 13333333333, name: 'John Doe', dob: new Date(1970, 1, 1), price: 2222233344 },
+      data: [{ id: 13333333333, name: 'John Doe', dob: new Date(1970, 1, 1), price: 2222233344, pric2e: 2222233344 },
       { id: 1333333333333, name: 'John24 Doe', dob: new Date(1970, 1, 1),price: 2222274 }]
     }]
     await this._exportExcel(excelConfigs, 'sss3我')
@@ -65,14 +66,15 @@ class HomeController extends Controller {
   /**
    * config = [{
    *   sheet: '',
-   *   showColumns: true
+   *   showColumns: true,
+   *   dataFormat: true
    *   columns,
    *   data,
    * }]
    */
   // https://github.com/guyonroche/exceljs/blob/master/README.md
 
-  async _exportExcel(configs) {
+  async _exportExcel(configs, excelName) {
     var workbook = new exceljs.Workbook();
     configs.forEach(config => {
       var worksheet = workbook.addWorksheet(config.sheet);
@@ -88,6 +90,13 @@ class HomeController extends Controller {
         // if(item.dataFormat) {
         //   item.
         // }
+        if(config.dataFormat) {
+          config.columns.forEach(columnConfig => {
+            if(columnConfig.dataFormat) {
+              item[columnConfig.key] = columnConfig.dataFormat(item[columnConfig.key], item)
+            }
+          })
+        }
         worksheet.addRow(item);
       })
       // worksheet.addRow({id: 13333333333, name: 'John Doe', dob: new Date(1970,1,1)});
@@ -100,7 +109,8 @@ class HomeController extends Controller {
     let buffer = await workbook.xlsx.writeBuffer()
     // let buffer = nodeExcel.build([{name: "订单列表", data: excelConfig}]);
     this.ctx.set('Content-Type', 'application/octet-stream');
-    this.ctx.set("Content-Disposition", "attachment; filename=" + (+new Date()) + '.xlsx');
+    // this.ctx.set("Content-Disposition", "attachment; filename=" + (+new Date()) + '.xlsx');
+    this.ctx.attachment(excelName + '.xlsx')
     this.ctx.body = buffer;
   }
   /**
