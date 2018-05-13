@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "dependencies": {
-    "egg": "^2.2.1",
+    "egg": "^2.8.1",
     "egg-scripts": "^2.5.0",
     "exceljs": "^1.4.6"
   },
