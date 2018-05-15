@@ -9,6 +9,9 @@
     "egg-scripts": "^2.5.0",
     "egg-view-nunjucks": "^2.2.0",
     "exceljs": "^1.4.6",
+    "http-proxy-middleware": "^0.18.0",
+    "koa2-connect": "^1.0.2",
+    "path-to-regexp": "^2.2.1",
     "stream-to-array": "^2.3.0",
     "stream-wormhole": "^1.0.3"
   },
@@ -29,7 +32,7 @@
     "start": "egg-scripts start --daemon --title=egg-server-demo",
     "stop": "egg-scripts stop --title=egg-server-demo",
     "dev": "egg-bin dev",
-    "debug": "egg-bin debug",
+    "debug": "egg-bin debug --debug-port=9233",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",

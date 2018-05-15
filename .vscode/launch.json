@@ -19,7 +19,7 @@
           "console": "integratedTerminal",
           "restart": true,
           "protocol": "auto",
-          "port": 9229,
+          "port": 9230,
           "autoAttachChildProcesses": true
       },
       {
@@ -36,7 +36,7 @@
           "console": "integratedTerminal",
           "restart": true,
           "protocol": "auto",
-          "port": 9229,
+          "port": 9230,
           "autoAttachChildProcesses": true
       },
       {
@@ -51,7 +51,7 @@
               "--inspect-brk"
           ],
           "protocol": "auto",
-          "port": 9229,
+          "port": 9230,
           "autoAttachChildProcesses": true
       },
       {
