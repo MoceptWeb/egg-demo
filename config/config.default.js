@@ -1,4 +1,5 @@
 'use strict';
+const path = require('path');
 
 module.exports = appInfo => {
   const config = exports = {};
@@ -9,5 +10,14 @@ module.exports = appInfo => {
   // add your config here
   config.middleware = [];
 
+  config.view = {
+    root: path.join(appInfo.baseDir, 'app/view'),
+    mapping: {
+      '.nj': 'nunjucks',
+    },
+    noCache: true,
+    defaultViewEngine: 'nunjucks',
+    defaultExtension: '.nj',
+  };
   return config;
 };

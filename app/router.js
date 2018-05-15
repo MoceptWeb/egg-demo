@@ -7,4 +7,7 @@ module.exports = app => {
   const { router, controller } = app;
   router.get('/', controller.home.index);
   router.get('/excel', controller.excel.export);
+
+
+  require('./router/upload')(app);
 };
